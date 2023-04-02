@@ -96,9 +96,7 @@ func main() {
 	}
 }
 
-//
 // Process -com_google_googleapis case
-//
 const repoPrefix = "@com_google_googleapis"
 
 var bazelQuery = []string{
@@ -284,9 +282,7 @@ func processProtoLibraryRule(rule Rule, info goProtoLibraryInfo) ([]string, erro
 	return relPathList, nil
 }
 
-//
 // Process -go_googleapis case
-//
 func generateFromPath(w io.Writer, rootPath string) error {
 	return filepath.Walk(rootPath, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
@@ -298,7 +294,7 @@ func generateFromPath(w io.Writer, rootPath string) error {
 		}
 		relPath = filepath.ToSlash(relPath)
 
-		if relPath == "google/actions/sdk/v2" {
+		if relPath == "google/actions/sdk/v2" || relPath == "google/devtools/containeranalysis/v1beta1" {
 			// Special case: these protos span multiple directories but have the same
 			// go_package. Not sure if these are meant to be publically consumed, but
 			// we can't handle them directly.
